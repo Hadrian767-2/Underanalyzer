@@ -32,14 +32,6 @@ jobs:
     - name: Execute unit tests
       run: dotnet test ./UnderanalyzerTest
 
-    - name: Publish ${{ matrix.os }} GUI
-      run: |
-        dotnet publish Underanalyzer -c ${{ matrix.configuration }} -r win-x64 --self-contained ${{ matrix.bundled }} -p:PublishSingleFile=${{ matrix.singlefile }} --output ${{ matrix.os }}
-    - name: Copy external files
-      run: |
-        cp ./README.md ./${{ matrix.os }}
-        cp ./SCRIPTS.md ./${{ matrix.os }}
-        cp ./LICENSE.txt ./${{ matrix.os }}
     - name: Upload ${{ matrix.os }} GUI
       uses: actions/upload-artifact@v4
       with:
